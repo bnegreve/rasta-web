@@ -6,7 +6,7 @@ import urllib.request
 import subprocess
 
 
-PORT = 4000
+PORT = 4002
 
 RASTA_PROJECT_PATH='../../../rasta-project'
 
@@ -53,9 +53,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
             print(str(query))
             print("queryt type '" + qtype + "'")
 
+            resp = "empty"
+
             if qtype == 'predict':
                 imageurl = query['imageurl'][0]
-                resp = predict_handler(imageurl)
+#                resp = predict_handler(imageurl)
+                resp = "poulet"
             elif qtype == 'setlabel':
                 resp = setLabel_handler()
             else:
@@ -63,8 +66,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 error = 1
             
         if error == 0:
+            print("Sending response " + resp)
             self.send_response(200)
-            self.send_header("Content-type", "text/html")
+            self.send_header("Content-type", "text/plain")
+            self.send_header('Access-Control-Allow-Origin', '*') # TODO AVOID 
             self.end_headers()
             self.wfile.write(bytes(resp, "utf-8"))
 
