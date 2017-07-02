@@ -104,38 +104,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
         qtype = query['type'][0]
         result = Handler.query_dispatcher[ qtype ] ( self, query )
         
-        
-
-
-
-#         qtype = qtype[0]
-#             print(str(querystr))
-#             print(str(query))
-#             print("query type '" + qtype + "'")
-
-#             resp = "empty"
-
-#             if qtype == 'predict':
-#                 imageurl = query['imageurl'][0]
-# #                resp = predict_handler(imageurl)
-#                 resp = '{"pred": ["Color_Field_Painting", "Minimalism", "Abstract_Art", "Magic_Realism", "Expressionism"]}'
-#             elif qtype == 'setlabel':
-#                 resp = setLabel_handler()
-#             else:
-#                 print("Unknown query type '"+ qtype + "'")
-#                 error = 1
-            
-#         if error == 0:
-#             print("Sending response " + resp)
-#             self.send_response(200)
-#             self.send_header("Content-type", "text/json")
-#             self.send_header('Access-Control-Allow-Origin', '*')
-#             self.end_headers()
-#             self.wfile.write(resp.encode("utf-8"))
-
-#         else:
-#             self.send_response(404)
-
 httpd = socketserver.TCPServer(("", PORT), Handler)
 
 print("serving at port", PORT)
