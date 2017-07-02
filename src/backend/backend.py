@@ -43,10 +43,15 @@ def query_predict(handler, query):
     outputstr = subprocess.getoutput(callstr)
     print("Subprocess output: " + outputstr)
 
-    # TODO to some checking on the return value
-    resp = json.loads(outputstr.split('\n')[-1])
-    resp['error'] = 0
+    try:
+        resp = json.loads(outputstr.split('\n')[-1])
+    except JSONDecoderError as e:
+        msg = "Server error! Cannot parse input from classifier"
+        print(msg)
+        handler.respond_with_error(500, msg)
+        return 500
 
+    resp['error'] = 0
     handler.respond(200, "text/json", json.dumps(resp))
     return 200
 
