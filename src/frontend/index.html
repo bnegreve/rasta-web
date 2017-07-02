@@ -105,30 +105,59 @@
 
             <div class="ink-grid vertical-space">
               <h1>Rasta</h1>
-                <p>
-		  <em>Recognising Art Style Automatically</em>
-
+	      <em>Recognising Art Style Automatically</em>
+              <p>
 		  <form class="ink-form">
 		      <div class="control-group">
-			  <label>Enter picture url:</label>
+			  <h2>Enter picture url</h2>
 			  <div class="control append-button" role="findtype">
 			      <span><input id="getstyle-url" type="text" placeholder="Paste URL here"></span>
 			      <button id="getstyle-url-button" class="ink-button" type="button">Find picture style</button>
 			  </div>
 		      </div>
 		  </form>
+	      </p>
 
+	      <p>
+		  <div class="control-group">
+		      
+		      <h2>Or choose one of these example picture</h2>
+		      <div id="example-carousel" class="ink-carousel" data-pagination="#my-carousel-2-pagination">
+			  <ul class="stage column-group half-gutters" id="example-li">
+			      <!-- place holder for example  -->
+
+			      <!-- <li class="slide all-50 small-100 tiny-100"> -->
+			      <!--     <img class="quarter-bottom-space" src="http://lorempixel.com/400/200/sports/1"> -->
+			      <!--     <div class="description"> -->
+			      <!-- 	<h4>This is slide 1</h4> -->
+			      <!--     </div> -->
+			      <!-- </li> -->
+
+			  </ul>
+			  <nav id="my-carousel-2-pagination" class="ink-navigation">
+			      <ul class="pagination chevron">
+			      </ul>
+			  </nav>
+		      </div>
+		      <!-- <div id="examples" class="column-group large-half-horizontal-gutters"> -->
+		      <script>
+			  examples();
+		      </script>
+		      <!-- </div> -->
+		  </div>
+	      </p>
+
+	      <h2> Result </h2>
+	      <p>
 		  <figure class="ink-image" id="the-image">
 		      <!-- place holder for image  -->
 		  </figure>
-		</p>
+	      </p>
 
-		<script>
-		    setForm(); 
-		</script>
             </div>
             <div class="push"></div>
         </div>
+
 
         <footer class="clearfix">
             <div class="ink-grid">
@@ -143,3 +172,9 @@
     </body>
 
 </html>
+
+<script>setForm();</script>
+<!-- Load the js files -->
+<script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/ink-all.js"></script>
+<!-- Autoload is required for the examples on this page. Read more below. -->
+<script type="text/javascript" src="http://fastly.ink.sapo.pt/3.1.10/js/autoload.js"></script>

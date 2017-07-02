@@ -30,6 +30,25 @@ function predict(img){
     });
 }
 
+function examples(){
+    examples = [ "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg", 
+		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
+		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
+		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
+		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
+		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg"   ]
+
+    str = '' 
+    for (i in examples){
+	str += '<li class="slide all-30 small-100 tiny-100">'
+	str += '<a onclick="predict(\'' + examples[i] + '\')"><img class="quarter-bottom-space" src="' + examples[i] + '"></a>'
+	str += '</li>'
+    }
+
+    $("#example-li").append(str); 
+
+}
+
 function setForm(){
     $("#getstyle-url-button").click(function(){
 	imageurl = $('#getstyle-url').val();
