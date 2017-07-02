@@ -25,18 +25,19 @@ def query_predict(handler, query):
 
     try:
         print("Downloading URL " + url)
-        ressource = urllib.request.urlretrieve(url)
+        (filename, ressource) = urllib.request.urlretrieve(url, '/tmp/rasta_tmp')
+        print("FILE " + str(ressource))
 
     except Exception as e:
         resp = {"error": 1, "error_msg": "Cannot download ressource at url '{}'. Exception {} occured.".format(url, str(type(e))) }
         handler.respond(200, "text/json", json.dumps(resp))
         return 200
     
-    callstr  = "python3 {path}/python/evaluation.py -t pred -k 5 -j "
+    callstr  = "python3 {path}/python/evaluation.py -t pred -k 3 -j "
     callstr += "--model_path={path}/savings/resnet_2017_6_29-18\:42\:50/model.h5 "
-    callstr += "--data_path=/tmp/file"
+    callstr += "--data_path=/tmp/rasta_tmp"
 
-    callstr  = callstr.format(path=RASTA_PROJECT_PATH)
+    callstr  = callstr.format(path=RASTA_PROJECT_PATH, filename = filename)
 
     print("Subprocess call string: " + callstr)
     outputstr = subprocess.getoutput(callstr)
