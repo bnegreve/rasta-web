@@ -45,7 +45,7 @@ def query_predict(handler, query):
 
     try:
         resp = json.loads(outputstr.split('\n')[-1])
-    except JSONDecoderError as e:
+    except json.JSONDecodeError as e:
         msg = "Server error! Cannot parse input from classifier"
         print(msg)
         handler.respond_with_error(500, msg)
