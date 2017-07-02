@@ -85,7 +85,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def respond(self, res, mimetype, content):
         self.send_response(res)
-        self.send_header("Content-type", content)
+        self.send_header("Content-type", mimetype)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(content.encode("utf-8"))
