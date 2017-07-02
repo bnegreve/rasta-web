@@ -1,11 +1,12 @@
 
 function predict(img){
 
-    str  = "<img src=\"" + img + "\">";
+    str  = '<img src="' + img + '">';
     str += '<figcaption class="over-top" id="the-image-caption">';
     str += "Please wait ... ";
     str += '</figcaption>';
     $("#the-image").html(str); 
+    $("#the-image").css('opacity', 0.5)
     $("#the-image").css('visibility', 'visible')
 
     $.ajax({
@@ -24,6 +25,7 @@ function predict(img){
 		}
 	    }
 	    $("#the-image-caption").html(str); 
+	    $("#the-image").css('opacity', 1)
 	}
     });
 }
