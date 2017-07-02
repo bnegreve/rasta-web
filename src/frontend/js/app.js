@@ -1,27 +1,29 @@
 
 function predict(img){
+
+    str  = "<img src=\"" + img + "\">";
+    str += '<figcaption class="over-top" id="the-image-caption">';
+    str += "Please wait ... ";
+    str += '</figcaption>';
+    $("#the-image").html(str); 
+    $("#the-image").css('visibility', 'visible')
+
     $.ajax({
 	type: 'GET',
 	url: 'http://localhost:4000/ajax',
 	crossDomain: true,
 	data: { type: "predict",
-		imageurl: img},
+		url: img},
 	cache: false,  
     	success: function( data ) {
-
-	    $("#the-image").css('visibility', 'visible')
-
-	    str  = "<img src=\"" + img + "\">";
-	    str += '<figcaption class="over-top">';
-
-	    for (var i in data.pred){
-	    	str += data.pred[i] + ", ";
+	    str = '';
+	    for (i in data.pred){
+	    	str += '<em>' + data.pred[i] + '</em>'
+		if(i < data.pred.length - 1){
+		    str += " or ";
+		}
 	    }
-
-	    str += '</figcaption>';
-
-	    $("#the-image").html(str); 
-
+	    $("#the-image-caption").html(str); 
 	}
     });
 }
