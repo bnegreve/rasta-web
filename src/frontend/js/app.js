@@ -2,20 +2,24 @@
 function predict(img){
     $.ajax({
 	type: 'GET',
-	url: 'http://localhost:4002/',
+	url: 'http://localhost:4000/ajax',
 	crossDomain: true,
 	data: { type: "predict",
 		imageurl: img},
 	cache: false,  
     	success: function( data ) {
+
 	    $("#the-image").css('visibility', 'visible')
 
 	    str  = "<img src=\"" + img + "\">";
 	    str += '<figcaption class="over-top">';
-	    str += data;
+
+	    for (var i in data.pred){
+	    	str += data.pred[i] + ", ";
+	    }
+
 	    str += '</figcaption>';
 
-	    alert(str);
 	    $("#the-image").html(str); 
 
 	}
@@ -25,7 +29,6 @@ function predict(img){
 function setForm(){
     $("#getstyle-url-button").click(function(){
 	imageurl = $('#getstyle-url').val();
-	alert(imageurl);
 	predict(imageurl); 
     });
 }
