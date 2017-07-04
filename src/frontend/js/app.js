@@ -62,9 +62,26 @@ function predict(img){
 	    }
 	    $("#the-image-caption").html(str); 
 	    $("#the-image").css('opacity', 1)
+
+	    set_progress_bars(data)
 	}
     });
 }
+
+function set_progress_bars(data){
+
+    str = '';
+    for (i in data.pcts){
+	var val = Math.round(data.pcts[i] * 100)
+	str += '<div class="ink-progress-bar" data-start-value="' + val + '" id="progress-bar-' + i + '">'; 
+	str += '<span class="caption">' + data.pred[i] + ': ' + val + '</span>'
+	str += '<div class="bar blue"></div>'
+	str += '</div>'
+    }
+
+    $("#progress-bar-area").html(str);
+}
+
 
 function examples(){
 
