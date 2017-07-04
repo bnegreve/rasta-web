@@ -1,4 +1,6 @@
 
+var URL='../backend/php/ajax.php'
+
 var example_base_url = "http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/"
 var example_list = [
     "Abstract_Art/ad-reinhardt_study-for-a-painting-1938-2.jpg", 
@@ -27,49 +29,113 @@ var example_list = [
     "Symbolism/akseli-gallen-kallela_ad-astra-1907.jpg", 
     "Ukiyo-e/hiroshige_a-bridge-across-a-deep-gorge.jpg" ]
 
-    // examples = [ "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg", 
-    // 		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
-    // 		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
-    // 		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
-    // 		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg",
-    // 		 "http://cdn.playbuzz.com/cdn/b19cddd2-1b79-4679-b6d3-1bf8d7235b89/93794aec-3f17-47a4-8801-a2716a9c4598_560_420.jpg"   ]
-
+function url_is_image(img){
+    return(img.match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
 
 function predict(img){
 
-    str  = '<img src="' + img + '">';
-    str += '<figcaption class="over-top" id="the-image-caption">';
-    str += "Please wait ... ";
-    str += '</figcaption>';
-    $("#the-image").html(str); 
+    str  = '<img src="' + img + '">'
+    str += '<figcaption class="over-top" id="the-image-caption">'
+    str += "Please wait ... "
+    str += '</figcaption>'
+    $("#message-area").empty()
+    $("#progress-bar-area").empty()
+    $("#the-image").html(str)
     $("#the-image").css('opacity', 0.5)
-    $("#the-image").css('visibility', 'visible')
 
-    $.ajax({
-	type: 'GET',
-//	url: '../backend/php/ajax.php',
-	url: 'http://localhost:4000/',
-	crossDomain: true,
-	data: { type: "predict",
-		url: img},
-	cache: false,  
-    	success: function( data ) {
-	    str = 'Best guess: ' + '<em>' + data.pred[0] + '</em>'
-	    
-	    for (i in data.pred){
-		if(i > 0 && data.pcts[i] > 0.39){
-		    str += ' or '
-		    str += '<em>' + data.pred[i] + '</em>'
+    var error = 0
+
+    if( ! url_is_image( img ) ){
+	show_user_error("Url does not point to a supported image file")
+	error = 1 
+    }
+    else{
+	
+	$.ajax({
+	    type: 'GET',
+	    url: URL,
+	    crossDomain: true,
+	    data: { type: "predict",
+		    url: img},
+	    cache: false,  
+    	    success: function( data ) {
+
+		if( ! ('error' in data) || data['error'] != 200){
+		    show_server_error(data)
+		    error = 1 
 		}
+		else if( 'user_error' in data && data['user_error'] != 0 ){
+		    show_user_error(get_user_error_msg(data))
+		    error = 1 
+		}
+		else{
+		    show_results(data)
+		    error = 0
+		}
+
 	    }
+	});
+    }
+    if(error){
+	$("#the-image").css('opacity', 1)
+	str = '<img src="img/what.jpeg">'
+	$("#the-image").html(str)
+    }
+}
 
-	    str = str.replace(/_/g , '&nbsp;');
-	    $("#the-image-caption").html(str); 
-	    $("#the-image").css('opacity', 1)
+function show_results(data){
+    show_best_guess(data)
+    show_progress_bars(data)
+}
 
-	    show_progress_bars(data)
+function show_server_error(error_msg){
+
+    str  = '<div class="ink-alert basic" role="error" id="message">'
+    str += '<button class="ink-dismiss">&times;</button>'
+    str += '<p><b>Server error:</b> Please try again later</p>'
+    str += '</div>'
+
+    $("#message-area").html(str)
+
+}
+
+function get_user_error_msg(data){
+    var error_msg
+    if( 'user_error_msg' in data )
+	error_msg = data['user_error_msg']
+    else
+	error_msg = 'Unknown user error'
+
+    return error_msg
+}
+
+function show_user_error(error_msg){
+
+
+    str  = '<div class="ink-alert basic" role="alert" id="message">'
+    str += '<button class="ink-dismiss">&times;</button>'
+    str += '<p><b>Warning:</b> ' + error_msg + '</p>'
+    str += '</div>'
+
+    $("#message-area").html(str)
+
+}
+
+function show_best_guess(data){
+    str = 'Best guess: ' + '<em>' + data.pred[0] + '</em>'
+    
+    for (i in data.pred){
+	if(i > 0 && data.pcts[i] > 0.39){
+	    str += ' or '
+	    str += '<em>' + data.pred[i] + '</em>'
 	}
-    });
+    }
+
+    str = str.replace(/_/g , '&nbsp;');
+    $("#the-image-caption").html(str); 
+    $("#the-image").css('opacity', 1)
+
 }
 
 function show_progress_bars(data){
