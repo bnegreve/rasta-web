@@ -47,7 +47,7 @@ function predict(img){
 
     $.ajax({
 	type: 'GET',
-	url: 'http://localhost:4000/ajax',
+	url: 'http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/ajax.php:4000/ajax.php',
 	crossDomain: true,
 	data: { type: "predict",
 		url: img},
