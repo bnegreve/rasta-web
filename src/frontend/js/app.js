@@ -1,5 +1,5 @@
 
-var URL='../backend/php/ajax.php'
+var URL='http://localhost:4000/'
 
 var example_base_url = "http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/"
 var example_list = [
