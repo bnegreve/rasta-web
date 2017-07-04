@@ -47,37 +47,54 @@ function predict(img){
 
     $.ajax({
 	type: 'GET',
-	url: '../backend/php/ajax.php',
+//	url: '../backend/php/ajax.php',
+	url: 'http://localhost:4000/',
 	crossDomain: true,
 	data: { type: "predict",
 		url: img},
 	cache: false,  
     	success: function( data ) {
-	    str = '';
+	    str = 'Best guess: ' + '<em>' + data.pred[0] + '</em>'
+	    
 	    for (i in data.pred){
-	    	str += '<em>' + data.pred[i] + '</em>'
-		if(i < data.pred.length - 1){
-		    str += " or ";
+		if(i > 0 && data.pcts[i] > 0.39){
+		    str += ' or '
+		    str += '<em>' + data.pred[i] + '</em>'
 		}
 	    }
+
+	    str = str.replace(/_/g , '&nbsp;');
 	    $("#the-image-caption").html(str); 
 	    $("#the-image").css('opacity', 1)
 
-	    set_progress_bars(data)
+	    show_progress_bars(data)
 	}
     });
 }
 
-function set_progress_bars(data){
+function show_progress_bars(data){
 
     str = '';
+
+
     for (i in data.pcts){
 	var val = Math.round(data.pcts[i] * 100)
-	str += '<div class="ink-progress-bar" data-start-value="' + val + '" id="progress-bar-' + i + '">'; 
-	str += '<span class="caption">' + data.pred[i] + ': ' + val + '</span>'
-	str += '<div class="bar blue"></div>'
-	str += '</div>'
+	if(val >= 1){
+
+	    
+	    var name = data.pred[i].replace(/_/g , '&nbsp;');
+	    // str += '<div class="ink-progress-bar" data-start-value="' + val + '" id="progress-bar-' + i + '">';
+
+	    str += '<div class="w3-light-grey">'
+	    str += '<div class="w3-grey" style="height:24px;width:' + val + '%">' + name + '</div>'
+	    str += '</div><br>'
+	    
+	    // str += '<span class="caption">' + name + ': ' + val + '</span>'
+	    // str += '<div class="bar blue"></div>'
+	    // str += '</div>'
+	}
     }
+
 
     $("#progress-bar-area").html(str);
 }
