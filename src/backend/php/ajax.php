@@ -39,6 +39,10 @@ $query_data = array();
 foreach ($_GET as $key => $val){
     $query_data[$key] = $val; 
 }
+
+$query_data['remote_addr'] = $_SERVER['REMOTE_ADDR'];
+
+
 $query = http_build_query($query_data);
 
 $headers = array('Content-type: text/json');
