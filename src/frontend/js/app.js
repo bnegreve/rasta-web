@@ -34,6 +34,12 @@ function url_is_image(img){
     return(img.match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
+function reset_image_area(){
+    $("#the-image").css('opacity', 1)
+    str = '<img src="img/what.jpeg">'
+    $("#the-image").html(str)
+}
+
 function predict(img){
 
     str  = '<img src="' + img + '">'
@@ -45,11 +51,9 @@ function predict(img){
     $("#the-image").html(str)
     $("#the-image").css('opacity', 0.5)
 
-    var error = 0
-
     if( ! url_is_image( img ) ){
 	show_user_error("Url does not point to a supported image file")
-	error = 1 
+	reset_image_area()
     }
     else{
 	
@@ -64,24 +68,18 @@ function predict(img){
 
 		if( ! ('error' in data) || data['error'] != 200){
 		    show_server_error(data)
-		    error = 1 
+		    reset_image_area()
 		}
 		else if( 'user_error' in data && data['user_error'] != 0 ){
 		    show_user_error(get_user_error_msg(data))
-		    error = 1 
+		    reset_image_area()
 		}
 		else{
 		    show_results(data)
-		    error = 0
 		}
 
 	    }
 	});
-    }
-    if(error){
-	$("#the-image").css('opacity', 1)
-	str = '<img src="img/what.jpeg">'
-	$("#the-image").html(str)
     }
 }
 
