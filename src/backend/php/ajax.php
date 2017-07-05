@@ -6,6 +6,8 @@
 /* error_reporting(E_ALL); */
 /* assert_options(ASSERT_ACTIVE, 1); */
 
+$URL='http://localhost:4000/'
+
 #$test_queries = array("blah", "{");
 
 
@@ -43,7 +45,7 @@ $headers = array('Content-type: text/json');
 
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, 'http://10.1.3.203:4000/?'.$query);
+curl_setopt($ch, CURLOPT_URL, $URL.'?'.$query);
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_HTTPGET, 1);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
