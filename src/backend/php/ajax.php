@@ -6,7 +6,7 @@
 /* error_reporting(E_ALL); */
 /* assert_options(ASSERT_ACTIVE, 1); */
 
-$URL='http://localhost:4000/'
+$URL='http://localhost:4000/';
 
 #$test_queries = array("blah", "{");
 
@@ -40,8 +40,10 @@ foreach ($_GET as $key => $val){
     $query_data[$key] = $val; 
 }
 
-$query_data['remote_addr'] = $_SERVER['REMOTE_ADDR'];
 
+if(array_key_exists('REMOTE_ADDR', $_SERVER)){
+    $query_data['remote_addr'] = $_SERVER['REMOTE_ADDR'];
+}
 
 $query = http_build_query($query_data);
 
