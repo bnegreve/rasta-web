@@ -49,14 +49,14 @@ if (curl_errno($ch)) {
 else{
     $info = curl_getinfo($ch);
 
-    if($info['content_type'] != 'text/json'){
-        echo "Error, unexpected content type\n";
-    }
-    else{
+    # if($info['content_type'] != 'text/json'){
+    #     echo "Error, unexpected content type\n";
+    # }
+    # else{
         http_response_code($info['http_code']);
-        header('Content-type: text/json');
+        header('Content-type: text/json; charset=utf-8');
         print($result); 
-    }
+#    }
 
 }
 
