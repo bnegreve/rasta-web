@@ -182,10 +182,16 @@ function examples(){
 
 }
 
+
+function submitForm(){
+    imageurl = $('#getstyle-url').val();
+    predict(imageurl); 
+}
+
+
 function setForm(){
     $("#getstyle-url-button").click(function(){
-	imageurl = $('#getstyle-url').val();
-	predict(imageurl); 
+	submitForm()
     });
 }
     
