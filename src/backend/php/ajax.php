@@ -8,26 +8,6 @@
 
 $URL='http://localhost:4000/';
 
-#$test_queries = array("blah", "{");
-
-
-/*     '{', */
-/* '{ "poulet":"balh"}', */
-/* '{ dqdkj&é "j&ékl"& é"', */
-/* '{ "type":"predict"}', */
-/* '{ "type":"predict", "url":"qsd"}', */
-/* '{ "type":"predict", "url":"http://thisdomaindoesnotexistihopeqsdqsd.com"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}', */
-/* '{ "type":"predict", "url":"http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/Post-Impressionism/adam-baltatu_olt-river-at-cozia.jpg"}'); */
-
-
 function send_error($code, $msg){
     http_response_code(500);
     header('Content-type: text/json');
