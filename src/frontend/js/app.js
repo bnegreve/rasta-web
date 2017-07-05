@@ -81,6 +81,9 @@ function predict(img){
 	    }
 	});
     }
+
+    // var result_area = document.getElementById('results')
+    // result_area.scrollIntoView();
 }
 
 function show_results(data){
@@ -169,10 +172,14 @@ function examples(){
 
     str = '' 
     for (i in example_list){
-	str += '<li class="slide all-30 small-100 tiny-100">'
-	str += '<div class="example-image-container"><a onclick="predict(\'' + example_base_url + example_list[i] + '\')">'
-	str += '<img class="quarter-bottom-space example-img" src="' + example_base_url + example_list[i] + '">'
-	str += '</a></div>'
+	str += '<li class="slide xlarge-10 large-20 medium-30 small-50 tiny-100">'
+	// str += '<div class="example-image-container"><a >'
+	str += '<a onclick="predict(\'' + example_base_url + example_list[i] + '\')">'
+	str += '<img class="quarter-bottom-space example-img" '
+	str += 'src="' + example_base_url + example_list[i] + '" '
+	str += ' >'
+	str += '</a>'
+	// str += '</a></div>'
 	str += '</li>'
     }
 

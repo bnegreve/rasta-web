@@ -73,12 +73,14 @@
 	    }
 	    
 	    .example-image-container {
-	    overflow: hidden;
+
 	    }
-	    .example-image-container img {
+	    .slide img {
 	    width: 200px;
 	    height: 200px;
+	    object-fit: cover;
 	    }
+
 
         </style>
     </head>
@@ -129,7 +131,7 @@
 		      
 		      <h2>Or choose one of these example picture</h2>
 		      <div id="example-carousel" class="ink-carousel" data-pagination="#my-carousel-2-pagination">
-			  <ul class="stage column-group half-gutters" id="example-li">
+			  <ul class="stage column-group quarter-gutters" id="example-li">
 			      <!-- place holder for example  -->
 
 			      <!-- <li class="slide all-50 small-100 tiny-100"> -->
@@ -154,7 +156,7 @@
 	      </p>
 
 
-	      <h2> See results </h2>
+	      <h2 id="results"> See results </h2>
 
 	      <div class="ink-grid" id="message-area">
 		  <!-- place holder for message area -->
@@ -162,13 +164,13 @@
 
 	      <div class="ink-grid">
 		  <div class="column-group horizontal-gutters">
-		      <div class="all-50">
+		      <div class="xlarge-60 large-50 medium-60 small-70 tiny-100">
 			  <figure class="ink-image" id="the-image">
 			      <img src="img/what.jpeg">
 			      <!-- place holder for image  -->
 			  </figure>
 		      </div>
-		      <div class="all-50">
+		      <div class="xlarge-40 large-50 medium-30 small-30 tiny-100">
 			  <div class="push"></div>
 			  <div id="progress-bar-area">
 			      <!-- place holder for progress bars -->
