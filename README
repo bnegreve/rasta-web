@@ -1,0 +1,57 @@
+How to set up the rasta-web application. 
+
+1. go into the rasta project and run rasta_server.py
+
+    cd ../rasta-project/python
+    python3 rasta_server.py
+
+This will run the http server and listen on port 4000
+(paths may differ since this is an independant project)
+
+2.1 Rasta-web, local set up (e.g. for testing purposes, otherwise see 2.2) 
+
+Edit the file
+
+    src/frontend/js/app.js
+
+and set the URL variable to
+
+    var URL='http://localhost:4000/'
+
+2.2 Rasta-web production set-up (e.g. when rasta_server.py is running behind a firewall)
+
+You need to set up the php proxy to forward http request to the rasta server.
+Here how to do it: 
+
+First step: edit the file
+
+    src/frontend/app.js
+
+and set the URL variable to
+    
+    var URL='../backend/php/ajax.php'
+
+Second set: edit the file
+
+    backend/php/ajax.php
+
+and set the $URL variable to :
+
+    $URL= 'http://localhost:4000/';
+
+Where localhost is the address of the rasta server (localhost if rasta server is running on the webserver.) 
+
+3 Access Rasta-web
+
+By accessing the file http://server/rasta_web/src/frontend/index.html from a web browser.
+where server is the dns of your http server
+
+NOTE for local set-ups: You may need to start an http server if you don't have one already running.
+You can do this by running the following commands
+
+    cd rasta-web/src/frontend
+    python3 -m http.server 8000
+
+Then you can check the results by accessing this url in your browser: http://localhost:8000
+
+     
