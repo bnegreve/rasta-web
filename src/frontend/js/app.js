@@ -150,8 +150,8 @@ function show_progress_bars(data){
 	    var name = data.pred[i].replace(/_/g , '&nbsp;');
 	    // str += '<div class="ink-progress-bar" data-start-value="' + val + '" id="progress-bar-' + i + '">';
 
-	    str += '<div class="w3-light-grey">'
-	    str += '<div class="w3-grey" style="height:24px;width:' + val + '%;white-space:nowrap;">' + name + ': ' + val + '%</div>'
+	    str += '<div class="w3-gray">'
+	    str += '<div class="w3-light-blue" style="height:24px;width:' + val + '%;white-space:nowrap;">' + name + ': ' + val + '%</div>'
 	    str += '</div><br>'
 	    
 	    // str += '<span class="caption">' + name + ': ' + val + '</span>'
