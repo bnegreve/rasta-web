@@ -17,9 +17,13 @@ function send_error($code, $msg){
 $query_data = array();
 
 foreach ($_GET as $key => $val){
-    $query_data[$key] = $val; 
+    /* if($key == "url"){ */
+    /*     $query_data['url'] = urlencode($query_data['url']); */
+    /* } */
+    /* else{ */
+        $query_data[$key] = $val;
+    /* } */
 }
-
 
 if(array_key_exists('REMOTE_ADDR', $_SERVER)){
     $query_data['remote_addr'] = $_SERVER['REMOTE_ADDR'];
@@ -27,7 +31,7 @@ if(array_key_exists('REMOTE_ADDR', $_SERVER)){
 
 $query = http_build_query($query_data);
 
-$headers = array('Content-type: text/json');
+$headers = array('Content-type: text/json; charset=utf-8');
 
 $ch = curl_init();
 
