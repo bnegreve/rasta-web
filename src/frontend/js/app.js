@@ -172,11 +172,12 @@ function examples(){
 
     str = '' 
     for (i in example_list){
+	url = encodeURI(example_base_url + example_list[i])
 	str += '<li class="slide xlarge-10 large-20 medium-30 small-50 tiny-100">'
 	// str += '<div class="example-image-container"><a >'
-	str += '<a onclick="predict(\'' + example_base_url + example_list[i] + '\')">'
+	str += '<a onclick="predict(\'' + url + '\')">'
 	str += '<img class="quarter-bottom-space example-img" '
-	str += 'src="' + example_base_url + example_list[i] + '" '
+	str += 'src="' + url + '" '
 	str += ' >'
 	str += '</a>'
 	// str += '</a></div>'
@@ -187,11 +188,18 @@ function examples(){
 
 }
 
-
 function submitForm(){
-    imageurl = $('#getstyle-url').val();
-    predict(imageurl); 
+    imgurl = $('#getstyle-url').val();
+
+    /* Encode uri if it is not already encoded */
+    if(decodeURI(imgurl) === imgurl){
+	imgurl = encodeURI(imgurl)
+	alert(imgurl)
+    }
+
+    predict(imgurl); 
 }
+
 
 
 function setForm(){
