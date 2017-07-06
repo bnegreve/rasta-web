@@ -190,7 +190,7 @@ function examples(){
 
 function submitForm(){
     imgurl = $('#getstyle-url').val();
-
+    imgurl = imgurl.trim()
     /* Encode uri if it is not already encoded */
     if(decodeURI(imgurl) === imgurl){
 	imgurl = encodeURI(imgurl)
