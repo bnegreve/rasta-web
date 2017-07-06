@@ -194,7 +194,6 @@ function submitForm(){
     /* Encode uri if it is not already encoded */
     if(decodeURI(imgurl) === imgurl){
 	imgurl = encodeURI(imgurl)
-	alert(imgurl)
     }
 
     predict(imgurl); 
