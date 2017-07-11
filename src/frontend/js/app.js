@@ -40,9 +40,11 @@ function reset_image_area(){
     $("#the-image").html(str)
 }
 
-function predict(img){
+function predict(imgurl){
 
-    str  = '<img src="' + img + '">'
+    imgurl_dec = decodeURIComponent(imgurl)
+
+    str  = '<img src="' + imgurl_dec + '">'
     str += '<figcaption class="over-top" id="the-image-caption">'
     str += "Please wait ... "
     str += '</figcaption>'
@@ -51,7 +53,7 @@ function predict(img){
     $("#the-image").html(str)
     $("#the-image").css('opacity', 0.5)
 
-    if( ! url_is_image( img ) ){
+    if( ! url_is_image( imgurl_dec ) ){
 	show_user_error("Url does not point to a supported image file")
 	reset_image_area()
     }
@@ -62,7 +64,7 @@ function predict(img){
 	    url: URL,
 	    crossDomain: true,
 	    data: { type: "predict",
-		    url: img},
+		    url: imgurl},
 	    cache: false,  
     	    success: function( data ) {
 
