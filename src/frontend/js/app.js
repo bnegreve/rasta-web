@@ -191,10 +191,11 @@ function examples(){
 
     str = '' 
     for (i in shuffle(example_list)){
-	url = encodeURI(example_base_url + example_list[i])
+	url = example_base_url + example_list[i]
+	url_enc = encodeURIComponent(url)
 	str += '<li class="slide xlarge-10 large-20 medium-30 small-50 tiny-100">'
 	// str += '<div class="example-image-container"><a >'
-	str += '<a onclick="predict(\'' + url + '\')">'
+	str += '<a onclick="predict(\'' + url_enc + '\')">'
 	str += '<img class="quarter-bottom-space example-img" '
 	str += 'src="' + url + '" '
 	str += ' >'
@@ -211,8 +212,9 @@ function submitForm(){
     imgurl = $('#getstyle-url').val();
     imgurl = imgurl.trim()
     /* Encode uri if it is not already encoded */
-    if(decodeURI(imgurl) === imgurl){
-	imgurl = encodeURI(imgurl)
+
+    if(decodeURIComponent(imgurl) === imgurl){
+	imgurl = encodeURIComponent(imgurl)
     }
 
     predict(imgurl); 
