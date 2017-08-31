@@ -31,7 +31,7 @@ var example_list = [
     "Ukiyo-e/hiroshige_a-bridge-across-a-deep-gorge.jpg" ]
 
 function url_is_image(img){
-    return(img.match(/\.(jpeg|jpg|gif|png)$/) != null);
+    return(img.toLowerCase().match(/\.(jpeg|jpg|gif|png)$/) != null);
 }
 
 function reset_image_area(){
