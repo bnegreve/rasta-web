@@ -1,8 +1,9 @@
 
+
 var URL='../backend/php/ajax.php'
 //var URL='http://localhost:4000/' use this if the server is running locally (and on port 4000)
 
-var example_base_url = "http://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/"
+var example_base_url = "https://www.lamsade.dauphine.fr/~bnegrevergne/webpage/software/rasta/rasta-project/data/wikipaintings_10/wikipaintings_test/"
 var example_list = [
     "Abstract_Art/ad-reinhardt_study-for-a-painting-1938-2.jpg", 
     "Abstract_Expressionism/ad-reinhardt_number-107-1950.jpg", 
